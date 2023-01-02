@@ -1,0 +1,19 @@
+image:
+  repository: "tofill"
+  tag: "latest"
+  pullPolicy: "Always"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+datadog:
+  enabled: false
+
+# -- the namespace on which raccoon will collect pods
+namespaceToRaccoon: default
+dryRun: true
