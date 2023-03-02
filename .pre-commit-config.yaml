@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/norwoodj/helm-docs
+    rev: v1.11.0
+    hooks:
+      - id: helm-docs
+        args:
+          - --chart-search-root=charts
+          - --template-files=README.md.gotmpl
+  - repo: local
+    hooks:
+      - id: trufflehog
+        name: TruffleHog
+        description: Detect secrets in your data.
+        entry: bash -c 'docker run --rm -v "$PWD:/src" ghcr.io/trufflesecurity/trufflehog:latest git --branch=HEAD file:///src --fail --only-verified'
+        language: system
+        stages: ["commit", "push"]
+      - id: semgrep
+        name: semgrep
+        entry: bash -c 'docker run --rm -v "$PWD:/src" returntocorp/semgrep semgrep --config p/ci --error --skip-unknown-extensions' 
+        language: system
+        stages: ["commit", "push"]

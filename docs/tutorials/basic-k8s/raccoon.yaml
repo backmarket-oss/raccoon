@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: raccoon
+  namespace: raccoon
+spec:
+  selector:
+    matchLabels:
+      app: raccoon
+  template:
+    metadata:
+      labels:
+        app: raccoon
+    spec:
+      serviceAccountName: raccoon
+      containers:
+      - name: raccoon
+        image: raccoon
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        args:
+        - garbage
+        env: 
+        - name: RACCOON_SELECTOR
+          value: app=nginx,env=local
+        - name: RACCOON_CHECK_INTERVAL
+          value: "10"
+        - name: RACCOON_TTL
+          value: "10"
+        - name: RACCOON_LEVEL
+          value: debug
+        - name: RACCOON_NAMESPACE
+          value: dev
+        ports:
+        - containerPort: 2112
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: raccoon
+  name: raccoon
+  namespace: raccoon
+spec:
+  ports:
+  - name: "2112"
+    port: 2112
+    protocol: TCP
+    targetPort: 2112
+  selector:
+    app: raccoon
+  type: ClusterIP
