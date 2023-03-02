@@ -1,0 +1,23 @@
+linters:
+  disable-all: true
+  enable:
+    - deadcode
+    - errcheck
+    - gocyclo
+    - godot
+    - gofmt
+    - gosimple
+    - revive
+    - unused
+
+linters-settings:
+  godot:
+    scope: declarations
+  gofmt:
+    simplify: true
+  gocyclo:
+    min-complexity: 10
+  revive:
+    ignore-generated-header: true
+    severity: warning
+    confidence: 0.3

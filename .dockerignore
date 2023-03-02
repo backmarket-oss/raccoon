@@ -1,0 +1,6 @@
+.git*
+.circleci
+LICENSE
+Makefile
+README.md
+logo.png

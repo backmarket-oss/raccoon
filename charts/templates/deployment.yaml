@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "raccoon.fullname" . }}
+  labels:
+{{ include "raccoon.labels" . | indent 4 }}
+    {{- if .Values.datadog.enabled }}
+    tags.datadoghq.com/version: {{ .Values.image.tag | trunc 30 }}
+    tags.datadoghq.com/service: {{ include "raccoon.fullname" . }}
+    tags.datadoghq.com/env: {{ .Values.environment }}
+    {{- end }}
+    {{- if .Values.additionalLabels }}
+{{ toYaml .Values.additionalLabels | indent 4 }}
+    {{- end }}
+    {{- with .Values.podAnnotations }}
+  annotations:
+{{ tpl (toYaml .) . | indent 8 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "raccoon.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "raccoon.fullname" . }}
+        name: {{ template "raccoon.fullname" . }}
+        {{- if .Values.datadog.enabled }}
+        tags.datadoghq.com/version: {{ .Values.image.tag | trunc 30 }}
+        tags.datadoghq.com/service: {{ include "raccoon.fullname" . }}
+        tags.datadoghq.com/env: {{ .Values.environment }}
+        {{- end }}
+        {{- if .Values.additionalLabels }}
+{{ toYaml .Values.additionalLabels | indent 8 }}
+        {{- end }}
+      {{- with .Values.podAnnotations }}
+      annotations:
+{{ tpl (toYaml .) . | indent 8 }}
+      {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "raccoon.fullname" . }}
+      {{- with .Values.securityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          args:
+            - garbage
+          env:
+            - name: RACCOON_NAMESPACE
+              value: {{ .Values.namespaceToRaccoon }}
+            - name: RACCOON_DRY_RUN
+              value: {{ .Values.dryRun | quote }}
+          {{- range .Values.env }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+          {{- end }}
+          {{- if .Values.datadog.enabled }}
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+               fieldRef:
+                 fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
