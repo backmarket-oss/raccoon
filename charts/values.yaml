@@ -1,5 +1,5 @@
 image:
-  repository: "tofill"
+  repository: "ghcr.io/backmarket-oss/raccoon"
   tag: "latest"
   pullPolicy: "Always"
 

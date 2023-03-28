@@ -61,6 +61,9 @@ cd raccoon
 make install
 ```
 
+### Pull docker image
+raccoon docker image is available at `ghcr.io/backmarket-oss/raccoon:latest`.
+
 ## Usage
 Each raccoon's flag is available as an environment variable with `RACCOON_` as prefix.
 
