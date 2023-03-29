@@ -1,0 +1,21 @@
+apiVersion: v1
+entries:
+  raccoon:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2023-03-29T09:39:22.028183575Z"
+    description: Ephemerality in kubernetes
+    digest: bf59d9d2ccbc3bfbeb493e87d41d4eb726ff8c08ce6a0c64250e88283780edfd
+    keywords:
+    - ephemerality
+    - kubernetes
+    maintainers:
+    - email: sre-team@backmarket.com
+      name: SRE team
+    name: raccoon
+    sources:
+    - https://github.com/backmarket-oss/raccoon
+    urls:
+    - https://github.com/backmarket-oss/raccoon/releases/download/raccoon-1.0.1/raccoon-1.0.1.tgz
+    version: 1.0.1
+generated: "2023-03-29T09:39:22.028188975Z"
