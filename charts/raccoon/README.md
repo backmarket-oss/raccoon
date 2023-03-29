@@ -3,9 +3,9 @@
 
 Ephemerality in kubernetes
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square)
 
-![AppVersion: 0.0.3](https://img.shields.io/badge/AppVersion-0.0.3-informational?style=flat-square)
+![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 ## Values
 
@@ -14,7 +14,7 @@ Ephemerality in kubernetes
 | datadog.enabled | bool | `false` |  |
 | dryRun | bool | `true` |  |
 | image.pullPolicy | string | `"Always"` |  |
-| image.repository | string | `"tofill"` |  |
+| image.repository | string | `"ghcr.io/backmarket-oss/raccoon"` |  |
 | image.tag | string | `"latest"` |  |
 | namespaceToRaccoon | string | `"default"` | the namespace on which raccoon will collect pods |
 | resources.limits.cpu | string | `"100m"` |  |
