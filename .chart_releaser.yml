@@ -1,0 +1,4 @@
+release-name-template: "helm-{{ .Name }}-{{ .Version }}"
+charts-dir: charts
+charts-repo-url: https://backmarket-oss.github.io/raccoon
+owner: backmarket-oss
