@@ -67,6 +67,17 @@ raccoon docker image is available at `ghcr.io/backmarket-oss/raccoon:latest`.
 ## Usage
 Each raccoon's flag is available as an environment variable with `RACCOON_` as prefix.
 
+### Helm repository
+Raccoon helm repository is available at https://backmarket-oss.github.io/raccoon/, please follow 
+these instructions to use it:
+
+```
+$ helm repo add raccoon https://backmarket-oss.github.io/raccoon
+
+$ helm search repo raccoon
+NAME                    CHART VERSION   APP VERSION     DESCRIPTION               
+backmarket-oss/raccoon  0.0.1           0.0.3           Ephemerality in kubernetes
+```
 
 Here is the available commands in raccoon
 ### garbage
