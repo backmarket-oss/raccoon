@@ -14,7 +14,7 @@ Ephemerality in kubernetes
 | datadog.enabled | bool | `false` |  |
 | dryRun | bool | `true` |  |
 | image.pullPolicy | string | `"Always"` |  |
-| image.repository | string | `"tofill"` |  |
+| image.repository | string | `"ghcr.io/backmarket-oss/raccoon"` |  |
 | image.tag | string | `"latest"` |  |
 | namespaceToRaccoon | string | `"default"` | the namespace on which raccoon will collect pods |
 | resources.limits.cpu | string | `"100m"` |  |
