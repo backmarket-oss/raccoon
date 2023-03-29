@@ -76,7 +76,7 @@ $ helm repo add raccoon https://backmarket-oss.github.io/raccoon
 
 $ helm search repo raccoon
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION               
-backmarket-oss/raccoon  0.0.1           0.0.3           Ephemerality in kubernetes
+backmarket-oss/raccoon  1.0.0           1.0.0           Ephemerality in kubernetes
 ```
 
 Here is the available commands in raccoon
